@@ -1,0 +1,39 @@
+info:
+  name: 07_POST_AddFavourite
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{baseurl}}/favorites"
+  body:
+    type: json
+    data: |-
+      {
+        "airport_id" : "HYD",
+        "note": "HYD Airport"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Retrieve the response body
+        const response = res.getBody();
+
+        // Extract the favourite ID
+        const favoriteId = response.data.id;
+
+        // Save the ID in environment variables
+        bru.setEnvVar("favoriteId", favoriteId);
+
+        // Display the saved ID
+        console.log("Favourite ID:", favoriteId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

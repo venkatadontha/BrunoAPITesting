@@ -1,0 +1,23 @@
+info:
+  name: 08_PATCH_FavouriteByID
+  type: http
+  seq: 9
+
+http:
+  method: PATCH
+  url: "{{baseurl}}/favorites/{{favoriteId}}"
+  body:
+    type: json
+    data: |-
+      {
+        "id" : "{{favoriteId}}",
+        "note" : "This is the airported with updated information"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

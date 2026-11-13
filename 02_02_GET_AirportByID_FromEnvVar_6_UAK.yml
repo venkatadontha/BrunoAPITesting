@@ -1,0 +1,32 @@
+info:
+  name: 02_02_GET_AirportByID_FromEnvVar_6_UAK
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseurl}}/airports/{{selectedAirport}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        // Retrieve airport IDs from environment variables
+        const airportIds = bru.getEnvVar("airportid");
+
+        // Select the airport at index 6
+        const selectedAirport = airportIds[6];
+
+        // Store the selected airport ID
+        bru.setEnvVar("selectedAirport", selectedAirport);
+
+        // Display the selected airport ID
+        console.log("Selected Airport ID:", selectedAirport);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

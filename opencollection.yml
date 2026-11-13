@@ -1,0 +1,33 @@
+opencollection: 1.0.0
+
+info:
+  name: AirportGapAPIs
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  auth:
+    type: bearer
+    token: "{{airportToken}}"
+  variables:
+    - name: Username
+      value: postman
+    - name: Password
+      value: password
+    - name: airportToken
+      value: 6uKiqt34szS1VVSRX1xZfrMD
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

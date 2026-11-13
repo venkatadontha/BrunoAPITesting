@@ -1,0 +1,33 @@
+info:
+  name: 04_POST_GenerateBearerToken
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseurl}}/tokens"
+  body:
+    type: json
+    data: |-
+      {
+        "email": "dvrkishore.ai@gmail.com",
+        "password": "Testing@123"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const response = res.getBody();
+
+        bru.setCollectionVar("airportToken", response.token);
+
+        console.log("Token captured successfully");
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

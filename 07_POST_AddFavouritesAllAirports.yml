@@ -1,0 +1,44 @@
+info:
+  name: 07_POST_AddFavouritesAllAirports
+  type: http
+  seq: 12
+
+http:
+  method: POST
+  url: "{{baseurl}}/favorites"
+  body:
+    type: json
+    data: |-
+      {
+        "airport_id": "{{selectedAirport}}",
+        "note": "{{selectedAirport}} Airport"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        // Retrieve airport IDs from environment variables
+        const airportIds = JSON.parse(bru.getEnvVar("airportid"));
+
+        // Select only the first airport ID
+        const selectedAirport = airportIds[0];
+
+        // Create the airport note
+        const note = selectedAirport + " Airport";
+
+        // Store the selected values
+        bru.setEnvVar("selectedAirport", selectedAirport);
+        bru.setEnvVar("airportNote", note);
+
+        // Display the values in the console
+        console.log("Selected Airport ID:", selectedAirport);
+        console.log("Airport Note:", note);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

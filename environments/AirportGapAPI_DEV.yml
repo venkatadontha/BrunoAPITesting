@@ -1,0 +1,4 @@
+name: AirportGapAPI_DEV
+variables:
+  - name: baseurl
+    value: https://airportgap.com/api

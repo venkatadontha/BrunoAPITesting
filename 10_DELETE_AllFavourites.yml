@@ -1,0 +1,16 @@
+info:
+  name: 10_DELETE_AllFavourites
+  type: http
+  seq: 11
+
+http:
+  method: DELETE
+  url: "{{baseurl}}/favorites/clear_all"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
