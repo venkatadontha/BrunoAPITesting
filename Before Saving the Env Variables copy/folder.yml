@@ -1,0 +1,7 @@
+info:
+  name: Before Saving the Env Variables copy
+  type: folder
+  seq: 14
+
+request:
+  auth: inherit

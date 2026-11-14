@@ -1,0 +1,39 @@
+info:
+  name: 02_GET_AllAirports_SavingFirstAirportInEnvVar
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseurl}}/airports"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Get the API response
+        const response = res.getBody();
+
+        // Extract all airport IDs using map()
+        const airportIds = response.data.map(airport => airport.id);
+
+        // Save all airport IDs
+        bru.setEnvVar("airportid", airportIds);
+
+        // Select the first airport ID
+        const selectedAirportId = airportIds[0];
+
+        // Save the first airport ID separately
+        bru.setEnvVar("selectedairportid", selectedAirportId);
+
+        // Display the values
+        console.log("All Airport IDs:", airportIds);
+        console.log("Selected Airport ID:", selectedAirportId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
